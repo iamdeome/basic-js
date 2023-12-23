@@ -18,8 +18,10 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
-  const age = (Math.log(MODERN_ACTIVITY / sampleActivity)) / 0.693;
-  return age;
+  if ( typeof sampleActivity != "string" || arguments.length === 0 || Number(sampleActivity) <= 0 || Number(sampleActivity > MODERN_ACTIVITY) || isNaN(Number(sampleActivity)) === true)
+  { return false; }
+  const age = (Math.log(MODERN_ACTIVITY / sampleActivity)) / (Math.LN2 /  HALF_LIFE_PERIOD);
+  return Math.ceil(age);
 }
 
 module.exports = {
